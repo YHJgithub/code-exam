@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 /**
  * 订单Service业务层处理
  */
+@Service
 public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> implements IOrderInfoService {
     @Autowired
     private OrderInfoMapper orderInfoMapper;
