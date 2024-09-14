@@ -1,5 +1,6 @@
 package com.spzx.order.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.spzx.domain.OrderInfo;
 import com.spzx.order.service.IOrderInfoService;
@@ -11,6 +12,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 订单Controller
@@ -33,15 +37,18 @@ public class OrderInfoController {
 
             @Parameter(name = "orderStatus", description = "订单状态", required = false)
             @RequestParam(required = false, defaultValue = "") Integer orderStatus) {
-
-
-        return null;
+        
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<OrderInfo> orderInfoPage = new PageInfo<>();
+        List<OrderInfo> orderInfoList = orderInfoService.list(orderStatus);
+        orderInfoPage.setList(orderInfoList);
+        return Result.build(orderInfoPage,ResultCodeEnum.SUCCESS);
     }
 
     @Operation(summary = "根据订单号获取订单信息")
     @GetMapping("getByOrderNo/{orderNo}")
     public Result<OrderInfo> getByOrderNo(@PathVariable String orderNo) {
-
-        return null;
+        OrderInfo orderInfo = orderInfoService.getByOrderNo(orderNo);
+        return Result.build(orderInfo,ResultCodeEnum.SUCCESS);
     }
 }

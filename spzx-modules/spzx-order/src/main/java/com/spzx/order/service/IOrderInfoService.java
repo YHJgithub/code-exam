@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.spzx.domain.OrderInfo;
 import com.spzx.vo.OrderForm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,4 +17,5 @@ public interface IOrderInfoService extends IService<OrderInfo> {
 
     OrderInfo getByOrderNo(String orderNo);
 
+    List<OrderInfo> list(Integer orderStatus);
 }

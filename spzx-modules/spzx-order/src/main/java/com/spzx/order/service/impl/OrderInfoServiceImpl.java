@@ -56,6 +56,19 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
 
     @Override
     public OrderInfo getByOrderNo(String orderNo) {
-        return null;
+        OrderInfo orderInfo = orderInfoMapper.selectOne(new LambdaQueryWrapper<OrderInfo>().eq(OrderInfo::getOrderNo, orderNo));
+        List<OrderItem> orderItems = orderItemMapper.selectList(new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderInfo.getId()));
+        orderInfo.setOrderItemList(orderItems);
+        return orderInfo;
+    }
+
+    @Override
+    public List<OrderInfo> list(Integer orderStatus) {
+        List<OrderInfo> orderInfoList = orderInfoMapper.selectList(new LambdaQueryWrapper<OrderInfo>().eq(OrderInfo::getOrderStatus, orderStatus));
+        orderInfoList.forEach(orderInfo -> {
+            List<OrderItem> orderItemList = orderItemMapper.selectList(new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderInfo.getId()));
+            orderInfo.setOrderItemList(orderItemList);
+        });
+        return orderInfoList;
     }
 }
