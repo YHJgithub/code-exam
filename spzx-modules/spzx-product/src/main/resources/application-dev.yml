@@ -1,0 +1,36 @@
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.spzx.**.domain
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 查看日志
+  global-config:
+    db-config:
+      logic-delete-field: del_flag # 全局逻辑删除的实体字段名
+      logic-delete-value: 2 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+# spring配置
+spring:
+  data:
+    redis:
+      host: 192.168.6.123
+      port: 6379
+      password:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:msyql://192.168.6.123:3306/exam_db_product?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      idle-timeout: 500000
+      max-lifetime: 540000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: GuliHikariPool
+  rabbitmq:
+    host: 192.168.6.123
+    port: 5672
+    username: guest
+    password: guest

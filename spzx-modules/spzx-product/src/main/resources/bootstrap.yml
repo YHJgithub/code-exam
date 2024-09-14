@@ -1,0 +1,31 @@
+# Tomcat
+server:
+  port: 9205
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: spzx-product
+  profiles:
+    # 环境配置
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: 192.168.6.123:8848
+        namespace: 5507e447-9673-4e40-9f7f-2c7fba9c7e98
+        group: spzx-group
+      config:
+        # 配置中心地址
+        server-addr: 192.168.6.123:8848
+        namespace: 5507e447-9673-4e40-9f7f-2c7fba9c7e98
+        group: spzx-group
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+  #        shared-configs:
+  #          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
