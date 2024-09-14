@@ -20,4 +20,19 @@
         sysdate()
         )
     </insert>
+    <update id="updateBrand">
+        update exam_db_product.brand
+        <set>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="logo != null and logo != ''">logo = #{logo},</if>
+            update_time = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+    <select id="findPage" resultType="com.spzx.domain.Brand">
+        select *
+        from exam_db_product.brand
+        where del_flag = '0'
+    </select>
 </mapper>

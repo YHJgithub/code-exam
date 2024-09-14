@@ -14,4 +14,10 @@ public interface IBrandService extends IService<Brand> {
 
 
     int addBrand(Brand brand);
+
+    int updateBrand(Brand brand);
+
+    int deleteBrand(Integer[] ids);
+
+    List<Brand> findPage(); 
 }
